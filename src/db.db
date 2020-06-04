@@ -1,0 +1,22 @@
+CREATE TABLE `Cab` (
+  `id` int NOT NULL,
+  `state` enum('IDLE','ON_TRIP') NOT NULL,
+  `city_id` int DEFAULT NULL,
+  `last_trip_time` datetime DEFAULT NULL,
+  `trip_count` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `Cab_History` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cab_id` varchar(45) DEFAULT NULL,
+  `action` varchar(45) DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `City` (
+  `id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
