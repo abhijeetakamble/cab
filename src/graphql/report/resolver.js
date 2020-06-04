@@ -3,8 +3,8 @@ const reportService = require('./service');
 
 const resolver = {
   Query: {
-    idleCab: async (_, input, context) => {
-      const response = await cabService.getIdleCabDetails(input, context);
+    idleCab: async (_, { input }, context) => {
+      const response = await reportService.getIdleCabDetails(input, context);
       return response;
     }
   }

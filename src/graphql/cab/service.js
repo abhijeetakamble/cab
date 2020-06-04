@@ -69,8 +69,31 @@ const updateHistory = async (input, context) => {
   });
 };
 
+const updateTrip = async (input, context) => {
+  const { id, state, cityId } = input;
+  return new Promise((resolve, reject) => {
+    let query;
+    if (state === 'ON_TRIP')
+      query = `INSERT INTO Trip ( cab_id, city_id, start, end) VALUES (${id}, ${cityId} , NOW(), NULL);`;
+    else query = `UPDATE Trip SET end = NOW() where cab_id = ${id} and end IS NULL`;
+    context.session.mysqlInstance.connection.query(query, function (error, result) {
+      console.log(query);
+      if (error) {
+        return resolve({
+          status: false,
+          message: 'Problem occurred during registration'
+        });
+      }
+      resolve({
+        status: true,
+        message: 'Successfully Registered'
+      });
+    });
+  });
+};
+
 const setCabState = async (input, context) => {
-  const { id, state } = input;
+  const { id, state, cityId } = input;
   return new Promise((resolve, reject) => {
     let query;
     if (state === 'ON_TRIP')
@@ -84,6 +107,7 @@ const setCabState = async (input, context) => {
         });
       }
       updateHistory(input, context);
+      updateTrip(input, context);
       resolve({
         status: true,
         message: 'Successfully Changed State'
@@ -107,7 +131,8 @@ const assignCab = async (input, context) => {
         setCabState(
           {
             id: result[0].id,
-            state: 'ON_TRIP'
+            state: 'ON_TRIP',
+            cityId: cityId
           },
           context
         ).then((result) => {
