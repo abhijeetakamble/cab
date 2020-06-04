@@ -1,0 +1,53 @@
+{
+  "name": "graphql-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "eslintIgnore": [
+    "build/",
+    "node_modules/",
+    "package.json"
+  ],
+  "keywords": [
+    "node.js",
+    "express",
+    "graphql",
+    "apollo-server-express"
+  ],
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.14",
+    "apollo-server": "^2.10.1",
+    "apollo-server-express": "^2.9.16",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "graphql-depth-limit": "^1.1.0",
+    "graphql-tag": "^2.10.1",
+    "mysql": "^2.18.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --config .prettierrc --write",
+      "eslint --max-warnings 10 --fix"
+    ]
+  },
+  "devDependencies": {
+    "apollo-server-testing": "^2.10.1",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "lint-staged": "^10.0.7",
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "nodemon --watch src --exec \"node index.js\"",
+    "lint": "eslint --max-warnings 10 src/",
+    "lint:fix": "eslint --max-warnings 10 --fix src/",
+    "format": "prettier --config ../../.prettierrc --write 'src/**'",
+    "precommit": "lint-staged"
+  }
+}
